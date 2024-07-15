@@ -10,13 +10,14 @@ interface AuthProviderProps {
 const AuthProvider = ({ children, allowedRoles }: AuthProviderProps): any => {
   const cookie = cookies().get("authenticate")?.value;
   const user = cookies().get("role")?.value;
-
+  console.log("user", user);
   if (!cookie) {
     redirect(`/auth/signin`);
   }
-  if (!user || !allowedRoles.includes(user)) {
-    redirect(`/unauthorised`);
-  }
+  // if (!user || !allowedRoles.includes(user)) {
+  //   redirect(`/unauthorised`);
+  //   return null;
+  // }
 
   return <div>{children}</div>;
 };
