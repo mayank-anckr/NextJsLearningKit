@@ -4,11 +4,11 @@ import Cookies from "js-cookie";
 function signClick() {
   console.log("clicked");
   Cookies.set("authenticate", "true");
+  Cookies.set("role", "user");
   window.location.href = "/dashboard";
 }
 function redirectTo() {
   console.log("clicked");
-  Cookies.set("authenticate", "true");
   window.location.href = "/auth/signup";
 }
 const Signin = () => {

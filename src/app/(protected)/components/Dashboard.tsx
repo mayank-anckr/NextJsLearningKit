@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 function signClick() {
   console.log("clicked");
-  Cookies.set("authenticate", "false");
+  Cookies.remove("authenticate");
   window.location.href = "/auth/signin";
 }
 const DashBoard = () => {
