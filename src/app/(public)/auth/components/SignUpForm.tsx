@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z, ZodSchema } from "zod";
-
+import Cookies from "js-cookie";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { userSignUp } from "@/service/signup.service";
+import { useRouter } from "next/navigation";
 
 const formSchema: ZodSchema<{
   firstName: string;
@@ -57,9 +58,20 @@ const SignUpForm = () => {
     resolver: zodResolver(formSchema),
   });
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormData> = async (values) => {
-    const response = await userSignUp(values);
-    console.log(response);
+    const { email, password } = values;
+    const sendData = {
+      username: email,
+      password: password,
+    };
+    const response = await userSignUp(sendData);
+    if (response.status === 200) {
+      Cookies.set("accessToken", response.data.data.accessToken);
+      Cookies.set("refreshToken", response.data.data.refreshToken);
+      router.push("/dashboard");
+    }
   };
 
   return (
