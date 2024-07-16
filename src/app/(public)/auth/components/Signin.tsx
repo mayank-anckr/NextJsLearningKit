@@ -1,17 +1,18 @@
 "use client";
 import React from "react";
 import Cookies from "js-cookie";
-function signClick() {
-  console.log("clicked");
-  Cookies.set("authenticate", "true");
-  window.location.href = "/dashboard";
-}
-function redirectTo() {
-  console.log("clicked");
-  Cookies.set("authenticate", "true");
-  window.location.href = "/auth/signup";
-}
+import { useRouter } from "next/navigation";
+
 const Signin = () => {
+  const router = useRouter();
+  const signClick = () => {
+    Cookies.set("authenticate", "true");
+    router.push("/dashboard");
+  };
+  const redirectTo = () => {
+    Cookies.set("authenticate", "true");
+    router.push("/auth/signup");
+  };
   return (
     <>
       <div>Signin page</div>
