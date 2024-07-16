@@ -9,7 +9,6 @@ interface AuthProviderProps {
 
 const AuthProvider = ({ children, allowedRoles }: AuthProviderProps): any => {
   const cookie = cookies().get("authenticate")?.value;
-  console.log(cookie);
   const user = cookies().get("role")?.value;
   if (!cookie || cookie !== "true") {
     redirect(`/auth/signin`);
